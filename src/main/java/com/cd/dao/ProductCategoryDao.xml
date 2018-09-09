@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cd.dao.ProductCategoryDao">
+
+    <resultMap id="BaseResultMap" type="com.cd.model.ProductCategory">
+        <id column="category_id" property="categoryId"/>
+        <result column="category_name" property="categoryName"/>
+        <result column="category_type" property="categoryType"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <select id="selectOne" resultMap="BaseResultMap">
+        select category_id,category_name,category_type from product_category where category_id=#{id}
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select category_id,category_name,category_type from product_category
+    </select>
+
+    <select id="selectByCategoryTypeIn" resultMap="BaseResultMap">
+        select category_id,category_name,category_type
+        from product_category
+        <if test="list.size > 0">
+            where category_type in
+            <foreach collection="list" item="categoryType" open="(" close=")" separator=",">
+                #{categoryType}
+            </foreach>
+        </if>
+    </select>
+    
+    <update id="update">
+        update product_category set category_name=#{categoryName},category_type=#{categoryType},update_time=#{updateTime} where category_id=#{categoryId}
+    </update>
+    
+    <insert id="insert">
+        insert into product_category(category_name,category_type) values(#{categoryName},#{categoryType})
+    </insert>
+    
+
+</mapper>

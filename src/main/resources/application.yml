@@ -1,0 +1,24 @@
+mybatis:
+  mapper-locations: classpath:com/cd/dao/*.xml
+
+server:
+  servlet:
+    context-path: /sell
+
+#配置数据库连接信息
+spring:
+  datasource:
+    username: root
+    password: chendeng1226
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://120.78.191.10:3306/sell?characterEncoding=utf-8&useSSL=false
+
+
+
+logging:
+  pattern:
+    console: "%d - %msg%n"
+#  path: D:\Program Files\IdeaProjects\log\tomcat\
+  file: D:\Program Files\IdeaProjects\log\tomcat\sell.log
+  level: 
+    com.cd.LoggerTest: debug
